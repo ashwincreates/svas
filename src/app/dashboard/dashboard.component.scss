@@ -1,0 +1,30 @@
+$expanded: 200px;
+$collapsed: 64px;
+
+mat-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+}
+
+mat-sidenav-container {
+   height: calc(100% - 64px); 
+}
+
+mat-sidenav, mat-sidenav-content {
+   transition: all 0.2s ease-in;
+}
+
+mat-sidenav ::ng-deep div { 
+    overflow: hidden;
+}
+
+.active {
+    color: blue;
+    background: #fafafa; 
+}

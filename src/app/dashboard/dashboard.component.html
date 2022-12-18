@@ -1,0 +1,40 @@
+<mat-toolbar class="mat-elevation-z8">
+    <span>
+        <button mat-icon-button (click)="onVisible()">
+            <mat-icon>menu</mat-icon>
+        </button>
+        svas
+    </span>
+    <span class="profile">
+        <mat-icon fontIcon="account_circle"></mat-icon>
+    </span>
+</mat-toolbar>
+<mat-sidenav-container>
+    <mat-sidenav mode="side" opened [ngStyle]="{'width': sidebarVisible ? '220px' : '64px' }">
+        <mat-nav-list>
+            <a mat-list-item routerLink='lookup' routerLinkActive='active'>
+                <mat-icon matListIcon fontIcon="storefront">
+                </mat-icon>
+                <h3 matLine>Lookup</h3>
+            </a>
+            <a mat-list-item routerLink='requests' routerLinkActive='active'>
+                <mat-icon matListIcon class="material-icons-outlined" fontIcon="verified_user">
+                </mat-icon>
+                <h3 matLine>Requests</h3>
+            </a>
+            <a mat-list-item routerLink='locations' routerLinkActive='active'>
+                <mat-icon matListIcon class="material-icons-outlined" fontIcon="map">
+                </mat-icon>
+                <h3 matLine>Working Locations</h3>
+            </a>
+            <a mat-list-item routerLink='feedback' routerLinkActive='active'>
+                <mat-icon matListIcon class="material-icons-outlined" fontIcon="chat">
+                </mat-icon>
+                <h3 matLine>Feedback</h3>
+            </a>
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content [ngStyle]="{'margin-left': sidebarVisible ? '220px' : '64px' }">
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>
