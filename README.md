@@ -30,5 +30,8 @@ Various constants can be found in .env
 
 ### Screenshots
 ![Angular Area Selection Screen](https://github.com/ashwincreates/svas/blob/main/src/assets/angular_map_view.png)
-![Flutter License View](https://github.com/ashwincreates/svas/blob/main/src/assets/flutter_license_view.png)
-![Flutter Map View](https://github.com/ashwincreates/svas/blob/main/src/assets/dlutter_map_view.png)
+<br>
+<div style="display: flex; gap: 10px">
+<img src="https://github.com/ashwincreates/svas/blob/main/src/assets/flutter_license_view.png" height="400px">
+<img src="https://github.com/ashwincreates/svas/blob/main/src/assets/flutter_map_view.png" height="400px">
+</div>
