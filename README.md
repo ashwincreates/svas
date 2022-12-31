@@ -29,6 +29,6 @@ go run .\cmd\server\main.go
 Various constants can be found in .env
 
 ### Screenshots
-![Angular Area Selection Screen](https://github.com/ashwincreates/svas/tree/main/src/assets/angular_map_view.png?raw=true)
-![Flutter License View](https://github.com/ashwincreates/svas/tree/main/src/assets/flutter_license_view.png?raw=true)
-![Flutter Map View](https://github.com/ashwincreates/svas/tree/main/src/assets/dlutter_map_view.png?raw=true)
+![Angular Area Selection Screen](https://github.com/ashwincreates/svas/blob/main/src/assets/angular_map_view.png)
+![Flutter License View](https://github.com/ashwincreates/svas/blob/main/src/assets/flutter_license_view.png)
+![Flutter Map View](https://github.com/ashwincreates/svas/blob/main/src/assets/dlutter_map_view.png)
