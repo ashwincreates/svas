@@ -36,7 +36,9 @@ func (h vendorHandler) LoginVendor(c *gin.Context) {
 
 	c.JSON(http.StatusAccepted, struct {
 		ID uint `json:"id"`
+		LicenseId uint `json:"licenseId"`
 	}{
 		vendor.ID,
+		vendor.LicenseId,
 	})
 }

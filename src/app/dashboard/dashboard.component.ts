@@ -11,7 +11,7 @@ export class DashboardComponent {
 
     constructor() { }
 
-    onVisible() {
+    toggleVisible() {
         this.sidebarVisible = !this.sidebarVisible;
     }
 

@@ -28,6 +28,7 @@ func (h certificateHandler) RetrieveCertificate(c *gin.Context) {
 		Nominee2      string `json:"nominee2"`
 		BussinessName string `json:"bussinessName"`
 		BussinessType string `json:"bussinessType"`
+		Status string `json:"status"`
 	}{
 		certificate.ID,
 		certificate.FirstName,
@@ -40,5 +41,6 @@ func (h certificateHandler) RetrieveCertificate(c *gin.Context) {
 		certificate.Nominee2,
 		certificate.BussinessName,
 		certificate.BussinessType,
+		certificate.Status,
 	})
 }

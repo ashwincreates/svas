@@ -5,37 +5,37 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
 class Auth with ChangeNotifier {
-  String? _token = "token";
-  String? _id = "4364f47e-be44-43d9-ae4a-2227195277b5";
+  // String? _token = "token";
+  num? _id;
+  num? _activatedLicenseId;
 
   Auth(String? token) {
     if (token != null) {
-      _token = token;
-      notifyListeners();
+      // _token = token;
+      // notifyListeners();
     }
   }
 
-  get token => _token;
+  // get token => _token;
 
-  get id => _id;
+  num? get activateLicenseId => _activatedLicenseId;
 
-  Future<String> login(String email, String password) async {
+  num? get id => _id;
+
+  Future<num?> login(String email, String password) async {
     var response = await http.post(
-        Uri.parse("${dotenv.get("SERVER")}/api/login_vendor"),
+        Uri.parse("${dotenv.get("SERVER")}/api/vendor/login"),
         body: jsonEncode({"email": email, "password": password}));
-    Map<String, dynamic> data = json.decode(response.body);
     debugPrint(response.body);
     debugPrint(response.statusCode.toString());
-    if (response.statusCode == 200) {
-      _token = data["jwt"];
+    if (response.statusCode == 202) {
+      Map<String, dynamic> data = json.decode(response.body);
+      // _token = data["jwt"];
       _id = data["id"];
-      debugPrint(data["message"]);
+      _activatedLicenseId = data["licenseId"];
       notifyListeners();
-      return data["message"];
-    } else {
-      debugPrint(data["error"]);
-      return data["error"];
+      return data["licenseId"];
     }
+    return null;
   }
 }
-

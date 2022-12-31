@@ -7,7 +7,7 @@ const docList = ["Aadhar", "Pan"];
 const bussType = ["Food", "Merchant"];
 
 class CertificateInfo {
-    String vendorId = "";
+  num? vendorId = 0;
   String firstName = "";
   String? middleName;
   String? lastName;
@@ -20,21 +20,19 @@ class CertificateInfo {
   String bussinessType = "";
   String bussinessName = "";
 
-  Map<String, String> toMap() {
-    Map<String, String> info = {
-      "vendor_id": vendorId,
-      "first_name": firstName,
-      "middle_name": middleName ?? "",
-      "last_name": lastName ?? "",
-      "doc_type": docType,
-      "doc_id": docId,
+  Map<String, dynamic> toMap() {
+    Map<String, dynamic> info = {
+      "vendorId": vendorId,
+      "firstName": firstName,
+      "middleName": middleName ?? "",
+      "lastName": lastName ?? "",
+      "docType": docType,
+      "docId": docId,
       "nominee1": nominee1,
       "nominee2": nominee2 ?? "",
-      "address_line1": city,
-      "address_line2": state,
-      "address_line3": "",
-      "bussiness_type": bussinessType,
-      "bussiness_name": bussinessName
+      "address": city,
+      "bussinessType": bussinessType,
+      "bussinessName": bussinessName
     };
     return info;
   }
@@ -61,9 +59,9 @@ class _NewCertificateState extends State<NewCertificate> {
 
   @override
   Widget build(BuildContext context) {
-      Auth auth = Provider.of<Auth>(context);
-      info.vendorId = auth.id;
-      Certificate cert = Provider.of<Certificate>(context);
+    Auth auth = Provider.of<Auth>(context);
+    info.vendorId = auth.id;
+    Certificate cert = Provider.of<Certificate>(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text("Apply for a new certificate"),

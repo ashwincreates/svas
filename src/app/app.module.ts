@@ -20,6 +20,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
+import { FormsModule } from '@angular/forms';
+
+import { GoogleMapsModule } from '@angular/google-maps';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
     declarations: [
@@ -41,7 +45,10 @@ import { MatMenuModule } from '@angular/material/menu';
         MatIconModule,
         MatSidenavModule,
         MatListModule,
-        MatMenuModule
+        MatMenuModule,
+		GoogleMapsModule,
+		FormsModule,
+		HttpClientModule
     ],
     providers: [],
     bootstrap: [AppComponent]

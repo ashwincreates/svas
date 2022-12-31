@@ -2,9 +2,7 @@ import 'package:app/UI/feed.dart';
 import 'package:app/UI/license.dart';
 import 'package:app/UI/location.dart';
 import 'package:app/UI/profile.dart';
-import 'package:app/model/auth.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class Dashboard extends StatefulWidget {
     const Dashboard({super.key});
@@ -16,7 +14,7 @@ class Dashboard extends StatefulWidget {
 class DashboardState extends State<Dashboard> {
 
   final List<Widget> pages = const [
-    License(), Location(), Feed() 
+    Licenses(), Location(), Feed() 
   ];
 
   int _selectedIndex = 0;

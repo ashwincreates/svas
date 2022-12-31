@@ -1,0 +1,28 @@
+.mat-sidenav-container {
+	height: 100%;
+}
+
+.mat-sidenav {
+	min-width: 250px;
+	padding-left: 16px;
+	padding-right: 16px;
+}
+
+form {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+.addlocation {
+	position: absolute;
+	bottom: 8rem;
+	right: 0.70rem;
+}
+
+header {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}

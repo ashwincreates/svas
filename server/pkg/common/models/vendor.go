@@ -10,4 +10,6 @@ type Vendor struct {
 	Name         string
 	Password     string
 	SessionToken string
+	LicenseId    uint
+	CertificateID  uint
 }

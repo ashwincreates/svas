@@ -9,57 +9,59 @@ import 'package:http/http.dart' as http;
 enum Status { verified, applied, notApplied }
 
 class Info {
-    String firstName = "";
-    String middleName = "";
-    String lastName = "";
-    String bussinessName = "";
+  String firstName = "";
+  String middleName = "";
+  String lastName = "";
+  String bussinessName = "";
 }
 
 class Certificate with ChangeNotifier {
-  String? certificateId;
+  num? certificateId;
   Status status = Status.notApplied;
   Info info = Info();
 
-  Future<void> getCertificate(String id) async {
+  Future<void> getCertificate(num? id) async {
+    debugPrint("Fetching Certificate");
     try {
-		var response = await http
-          .get(Uri.parse("${dotenv.get("SERVER")}/api/get_certificate/$id"));
-		if (response.statusCode == HttpStatus.ok) {
-			Map<String, dynamic> data = json.decode(response.body);
-			certificateId = data["certificate_id"];
-			debugPrint("certificateId: $certificateId");
-			if (data["status"] == "SIGNED") {
-				status = Status.verified;
-			} else {
-				status = Status.applied;
-			}
-			info.firstName = data["first_name"];
-        	info.middleName = data["middle_name"];
-        	info.lastName = data["last_name"];
-        	info.bussinessName = data["bussiness_name"];
-		}
+      var response = await http.get(
+          Uri.parse("${dotenv.get("SERVER")}/api/certificate/retrieve/$id"));
+      if (response.statusCode == HttpStatus.accepted) {
+        Map<String, dynamic> data = json.decode(response.body);
+        certificateId = data["id"];
+        debugPrint("certificateId: $certificateId");
+        if (data["status"] == "SIGNED") {
+          status = Status.verified;
+        } else {
+          status = Status.applied;
+        }
+        info.firstName = data["firstName"];
+        info.middleName = data["middleName"];
+        info.lastName = data["lastName"];
+        info.bussinessName = data["bussinessName"];
+		notifyListeners();
+      }
     } on Exception {
-		debugPrint("Network Error occured");
+      debugPrint("Network Error occured");
     }
   }
 
   Future<void> submitCertificate(CertificateInfo cert) async {
     try {
-        var response = await http
-                .post(Uri.parse("${dotenv.get("SERVER")}/api/create_ceritificate"), body: jsonEncode(cert.toMap()));
-        if (response.statusCode == HttpStatus.ok || response.statusCode == HttpStatus.created) {
-            Map<String, dynamic> data = json.decode(response.body);
-            certificateId = data["certificate_id"];
-            info.firstName = cert.firstName; 
-            info.middleName = cert.middleName ?? "";
-            info.lastName = cert.lastName ?? ""; 
-            info.bussinessName = cert.bussinessName; 
-            status = Status.applied;
-            notifyListeners();
-        }
+      var response = await http.post(
+          Uri.parse("${dotenv.get("SERVER")}/api/certificate/create"),
+          body: jsonEncode(cert.toMap()));
+      if (response.statusCode == HttpStatus.accepted) {
+        Map<String, dynamic> data = json.decode(response.body);
+        certificateId = data["id"];
+        info.firstName = cert.firstName;
+        info.middleName = cert.middleName ?? "";
+        info.lastName = cert.lastName ?? "";
+        info.bussinessName = cert.bussinessName;
+        status = Status.applied;
+        notifyListeners();
+      }
     } on Exception {
-        debugPrint("Failed to submit certificate");
+      debugPrint("Failed to submit certificate");
     }
   }
 }
-

@@ -1,1 +1,51 @@
-<p>locations works!</p>
+<mat-sidenav-container>
+	<!-- Edit panel && Info Panel-->
+	<mat-sidenav mode="side" [opened]="editEnabled || infoEnabled" position="end">
+		<header>
+			<h4 *ngIf="editEnabled">Add Working Location</h4>
+			<h4 *ngIf="infoEnabled">Location Info</h4>
+			<button mat-icon-button (click)="editEnabled ? toggleEditPanel($event): toggleInfoPanel(null)">
+				<mat-icon>close</mat-icon>
+			</button>
+		</header>
+		<form (ngSubmit)="addMarker($event)">
+			<mat-form-field>
+				<input matInput matNativeControl #areaname placeholder="name" name="name"
+					[value]="selectedArea ? selectedArea.name: ''" 
+					(keyup)="updateName($event)"/>
+			</mat-form-field>
+			<mat-form-field>
+				<input matInput matNativeControl #address placeholder="address" name="address"
+					[value]="selectedArea ? selectedArea.address: ''" 
+					(keyup)="updateAddress($event)"/>
+			</mat-form-field>
+			<mat-form-field>
+				<input matInput matNativeControl placeholder="radius" [value]="selectedArea ? selectedArea.radius: ''"
+					(keyup)="updateRadius($event)" />
+			</mat-form-field>
+			<button color="primary" *ngIf="editEnabled" mat-raised-button (click)="addMarker($event)">Add Location</button>
+			<button color="primary" *ngIf="infoEnabled" mat-raised-button (click)="updateMarker($event)">Update Location</button>
+			<button color="primary" *ngIf="infoEnabled" mat-raised-button (click)="deleteMarker($event)">Delete Location</button>
+		</form>
+	</mat-sidenav>
+	<!-- Map Content -->
+	<mat-sidenav-content>
+		<google-map width="100%" height="100%" [center]="selectedArea ? selectedArea.center : defaultCenter"
+			option="mapOptions" (mapClick)="changeMarker($event)">
+			<!-- Center marker -->
+			<map-marker [position]="selectedArea.center" [options]="markerOptions" *ngIf="selectedArea">
+			</map-marker>
+			<!-- Center circle -->
+			<map-circle [center]="selectedArea.center" [radius]="selectedArea.radius!" [options]="circleOptions" *ngIf="selectedArea">
+			</map-circle>
+			<!-- Markers -->
+			<map-marker *ngFor="let markerArea of markerPositions" [position]="markerArea.center"
+				[options]="markerOptions" (mapClick)="toggleInfoPanel(markerArea)">
+			</map-marker>
+			<button mat-mini-fab *ngIf="!editEnabled && !infoEnabled" color="primary" (click)="toggleEditPanel($event)"
+				class="addlocation">
+				<mat-icon>add</mat-icon>
+			</button>
+		</google-map>
+	</mat-sidenav-content>
+</mat-sidenav-container>
